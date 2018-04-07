@@ -2,5 +2,10 @@
     <string name="app_name">MyWeatherApp</string>
     <string name="celcius">°C</string>
     <string name="not_changed">В данный момент отображена актуальная информация</string>
+    <string name="lat">Широта: </string>
+    <string name="lon">Долгота: </string>
+    <string name="loading">Загрузка</string>
+    <string name="wait">Пожалуйста, подождите</string>
+    <string name="icon_id">drawable/i</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

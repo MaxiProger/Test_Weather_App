@@ -113,8 +113,8 @@ public class OnlineFragment extends Fragment implements OnlineView {
 
     @Override
     public void showDialog(boolean b) {
-        progressDialog.setTitle("Загрузка ");
-        progressDialog.setMessage("Пожалуйста, подождите");
+        progressDialog.setTitle(getResources().getString(R.string.loading));
+        progressDialog.setMessage(getResources().getString(R.string.wait));
         if (b) progressDialog.show();
         else progressDialog.dismiss();
     }
@@ -125,21 +125,13 @@ public class OnlineFragment extends Fragment implements OnlineView {
         Snackbar.make(constraintLayout, s, Snackbar.LENGTH_LONG).show();
     }
 
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (isStateSaved()) {
-
-        }
-    }
-
     @Override
     public void refresh() {
+        String message = getResources().getString(R.string.not_changed);
         java.util.Calendar calendar = java.util.Calendar.getInstance();
         if (lastTime != 0) {
             if ((calculateDistance() <= 50) || (calendar.getTimeInMillis() - lastTime <= HALF_HOUR)) {
-                Snackbar.make(constraintLayout, R.string.not_changed, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(constraintLayout, message, Snackbar.LENGTH_LONG).show();
             } else {
                 presenter.getData();
                 presenter.showDialog(true);
@@ -192,17 +184,18 @@ public class OnlineFragment extends Fragment implements OnlineView {
                 });
     }
 
+    @SuppressLint("SetTextI18n")
     public void bindViews(DbDto dbDto) {
-        weather_tv.setText(dbDto.getWeather());
-        geo_tv.setText("Широта: " + String.valueOf(dbDto.getLat()) + "\n"
-                + "Долгота: " + String.valueOf(dbDto.getLon()));
+        weather_tv.setText(dbDto.getWeather()+ getResources().getString(R.string.celcius));
+        geo_tv.setText(getResources().getString(R.string.lat) + String.valueOf(dbDto.getLat()) + "\n"
+                + getResources().getString(R.string.lon) + String.valueOf(dbDto.getLon()));
         address_tv.setText(dbDto.getAddress());
 
         lastTime = dbDto.getTime();
         lat1 = dbDto.getLat();
         lon1 = dbDto.getLon();
 
-        int id = getResources().getIdentifier("drawable/i" + dbDto.getIcon(), null, getContext().getPackageName());
+        int id = getResources().getIdentifier(getResources().getString(R.string.icon_id) + dbDto.getIcon(), null, getContext().getPackageName());
 
         imageView.setImageDrawable(getResources().getDrawable(id));
     }

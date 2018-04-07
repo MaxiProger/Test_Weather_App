@@ -66,7 +66,7 @@ public class DataSource  {
                         dbDto.setLat(lat);
                         dbDto.setLon(lon);
                         dbDto.setWeather(responseWeatherDto.getWeather().get(0).getDescription()+", "
-                                +responseWeatherDto.getMain().getTemp()+ "°C");
+                                +responseWeatherDto.getMain().getTemp());
                         dbDto.setIcon(responseWeatherDto.getWeather().get(0).getIcon());
                         dbDto.setTime(java.util.Calendar.getInstance().getTimeInMillis());
                         dbDto.setDate(dateFormat.format(new Date()));
