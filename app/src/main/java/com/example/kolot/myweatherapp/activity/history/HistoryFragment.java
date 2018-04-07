@@ -6,7 +6,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +89,7 @@ public class HistoryFragment extends Fragment implements HistoryView{
                 .subscribe(new Consumer<List<DbDto>>() {
                     @Override
                     public void accept(List<DbDto> dbDtos) throws Exception {
-                        if(dbDtos.size()>=25)
+                        if(dbDtos.size()>=40)
                             presenter.trimList(dbDtos.size(), dbDtos);
                         adapter.setData(dbDtos);
                     }
@@ -103,12 +102,14 @@ public class HistoryFragment extends Fragment implements HistoryView{
         );
     }
 
+    //для экономия места на устройстве, максимальное число запросов в базе данных не будет превышать 40
+
     @Override
     public void deleteItems(int size, List<DbDto> dbDtos) {
 
         List<DbDto> newDbDtos = new ArrayList<>();
 
-        for (int i = --size; i>=25; i--){
+        for (int i = --size; i>=40; i--){
             newDbDtos.add(dbDtos.get(i));
         }
 
