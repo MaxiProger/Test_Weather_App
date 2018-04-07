@@ -28,6 +28,10 @@ public class OnlinePresenter implements DataSource.DataInteractor {
                 onlineView.getLon());
     }
 
+    public void showDialog(boolean isShowing){
+        onlineView.showDialog(isShowing);
+    }
+
     @Override
     public void onSuccess(long id) {
        onlineView.showWeather(id);
@@ -35,10 +39,16 @@ public class OnlinePresenter implements DataSource.DataInteractor {
 
     @Override
     public void onError(String s) {
+        onlineView.showDialog(false);
         onlineView.showMessage(s);
     }
 
     public void onRefresh(){
         onlineView.refresh();
+    }
+
+
+    public void showMessage(String msg){
+        onlineView.showMessage(msg);
     }
 }

@@ -5,11 +5,12 @@ package com.example.kolot.myweatherapp.activity.online;
  */
 
 public interface OnlineView {
-    void showMessage(String s);
+    void showMessage(String message);
     double getLat();
     double getLon();
     void refresh();
-    void showWeather(long s);
+    void showWeather(long id);
     void getCoordinates();
+    void showDialog(boolean isShowing);
     String getlatlng();
 }
